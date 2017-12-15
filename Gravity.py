@@ -40,9 +40,9 @@ def gravity(dots,k,t,a,b):
 	kwargs={ 'duration': 0.04 }
 	with imageio.get_writer('Gravity.gif', mode='I', **kwargs ) as writer:
 		timer = 0
-		while k1>=1:
-			progress(100 * (128-k1) / 128)
-			plt.style.use('dark_background')
+		while timer<100:
+			progress(100 * (100-timer) / 100)
+			#plt.style.use('dark_background')
 			plt.title('Gravity Simulation')
 			plt.xlabel('First Axis')
 			plt.ylabel('Second Axis')
@@ -50,15 +50,24 @@ def gravity(dots,k,t,a,b):
 			plt.xlim(0, 1)
 			plt.ylim(0, 1)
 			plt.text(0.27, -0.05, 'Timelapse acceleration: 1e+'+str(64.0*k/k1),fontsize=10)
-			plt.plot([dots4[0],dots3[0]],[dots4[1],dots3[1]],c=(1.0,1.0,0.8,0.7),lw=0.5)
-			plt.plot([dots3[0],dots2[0]],[dots3[1],dots2[1]],c=(1.0,1.0,0.8,0.8),lw=1.0)
-			plt.plot([dots2[0],dots1[0]],[dots2[1],dots1[1]],c=(1.0,1.0,0.8,0.9),lw=1.5)
-			plt.plot([dots1[0],dots[0]],[dots1[1],dots[1]],c=(1.0,1.0,0.8,1.0),lw=2.0)
-			plt.plot(dots[0],dots[1],'.',c=(1.0,1.0,0.8,0.01),mew=1.0,ms=48.0)
-			plt.plot(dots[0],dots[1],'.',c=(1.0,1.0,0.8,0.05),mew=1.0,ms=24.0)
-			plt.plot(dots[0],dots[1],'.',c=(1.0,1.0,0.8,0.2),mew=1.0,ms=12.0)
-			plt.plot(dots[0],dots[1],'.',c=(1.0,1.0,0.8,0.8),mew=1.0,ms=6.0)
-			plt.plot(dots[0],dots[1],'.',c=(1.0,1.0,0.8),mew=1.0,ms=3.0)
+			plt.plot([dots4[0][dots[2]==1],dots3[0][dots[2]==1]],[dots4[1][dots[2]==1],dots3[1][dots[2]==1]],c=(1.0,0.0,0.0,0.7),lw=0.5)
+			plt.plot([dots3[0][dots[2]==1],dots2[0][dots[2]==1]],[dots3[1][dots[2]==1],dots2[1][dots[2]==1]],c=(1.0,0.0,0.0,0.8),lw=1.0)
+			plt.plot([dots2[0][dots[2]==1],dots1[0][dots[2]==1]],[dots2[1][dots[2]==1],dots1[1][dots[2]==1]],c=(1.0,0.0,0.0,0.9),lw=1.5)
+			plt.plot([dots1[0][dots[2]==1],dots[0][dots[2]==1]],[dots1[1][dots[2]==1],dots[1][dots[2]==1]],c=(1.0,0.0,0.0,1.0),lw=2.0)
+			plt.plot(dots[0][dots[2]==1],dots[1][dots[2]==1],'.',c=(1.0,0.0,0.0,0.01),mew=1.0,ms=48.0)
+			plt.plot(dots[0][dots[2]==1],dots[1][dots[2]==1],'.',c=(1.0,0.0,0.0,0.05),mew=1.0,ms=24.0)
+			plt.plot(dots[0][dots[2]==1],dots[1][dots[2]==1],'.',c=(1.0,0.0,0.0,0.2),mew=1.0,ms=12.0)
+			plt.plot(dots[0][dots[2]==1],dots[1][dots[2]==1],'.',c=(1.0,0.0,0.0,0.8),mew=1.0,ms=6.0)
+			plt.plot(dots[0][dots[2]==1],dots[1][dots[2]==1],'.',c=(1.0,0.0,0.0),mew=1.0,ms=3.0)
+			plt.plot([dots4[0][dots[2]==-1],dots3[0][dots[2]==-1]],[dots4[1][dots[2]==-1],dots3[1][dots[2]==-1]],c=(0.0,0.0,1.0,0.7),lw=0.5)
+			plt.plot([dots3[0][dots[2]==-1],dots2[0][dots[2]==-1]],[dots3[1][dots[2]==-1],dots2[1][dots[2]==-1]],c=(0.0,0.0,1.0,0.8),lw=1.0)
+			plt.plot([dots2[0][dots[2]==-1],dots1[0][dots[2]==-1]],[dots2[1][dots[2]==-1],dots1[1][dots[2]==-1]],c=(0.0,0.0,1.0,0.9),lw=1.5)
+			plt.plot([dots1[0][dots[2]==-1],dots[0][dots[2]==-1]],[dots1[1][dots[2]==-1],dots[1][dots[2]==-1]],c=(0.0,0.0,1.0,1.0),lw=2.0)
+			plt.plot(dots[0][dots[2]==-1],dots[1][dots[2]==-1],'.',c=(0.0,0.0,1.0,0.01),mew=1.0,ms=48.0)
+			plt.plot(dots[0][dots[2]==-1],dots[1][dots[2]==-1],'.',c=(0.0,0.0,1.0,0.05),mew=1.0,ms=24.0)
+			plt.plot(dots[0][dots[2]==-1],dots[1][dots[2]==-1],'.',c=(0.0,0.0,1.0,0.2),mew=1.0,ms=12.0)
+			plt.plot(dots[0][dots[2]==-1],dots[1][dots[2]==-1],'.',c=(0.0,0.0,1.0,0.8),mew=1.0,ms=6.0)
+			plt.plot(dots[0][dots[2]==-1],dots[1][dots[2]==-1],'.',c=(0.0,0.0,1.0),mew=1.0,ms=3.0)
 			plt.savefig('temp.png')
 			plt.close()
 			image = imageio.imread('temp.png')
@@ -70,22 +79,22 @@ def gravity(dots,k,t,a,b):
 			for i in range(0,len(dots)):
 				corr = (0.5+dist(dots[0][:],dots[0][i],dots[1][:],dots[1][i]))
 				corr = corr**k1
-				deltax[i] = a*(np.sum((dots[0][:]-dots[0][i])/corr)/np.sum(1/corr)) + b*deltax[i]
-				deltay[i] = a*(np.sum((dots[1][:]-dots[1][i])/corr)/np.sum(1/corr)) + b*deltay[i]
+				deltax[i] = a*(np.sum((-1)*dots[2][:]*dots[2][i]*(dots[0][:]-dots[0][i])/corr)/np.sum(1/corr)) + b*deltax[i]
+				deltay[i] = a*(np.sum((-1)*dots[2][:]*dots[2][i]*(dots[1][:]-dots[1][i])/corr)/np.sum(1/corr)) + b*deltay[i]
 				dots[0][i] = dots[0][i]+deltax[i]
 				dots[1][i] = dots[1][i]+deltay[i]
-			if (k1>2):
-				k1=k1*0.99
+			if np.sum(np.asarray(deltax)*np.asarray(deltax)+np.asarray(deltay)*np.asarray(deltay))<1:
+				timer=timer+1
 			else:
-				k1=k1-0.01
+				timer=0
 	endProgress()
 
 def GO():
 	dots=[]
 	for i in range(0,100):
-		dots.append([random.random(),random.random()])
+		dots.append([random.random(),random.random(),2*(i%2)-1])
 	dots=pd.DataFrame(dots)
 	print("=== Simulating gravitational force ===")
-	a=gravity(dots,128,100,0.01,0.98)
+	a=gravity(dots,2,100,0.1,0.4)
 
 GO()
