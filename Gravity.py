@@ -54,7 +54,11 @@ def gravity(dots,k,t,a):
 			plt.plot([dots3[0],dots2[0]],[dots3[1],dots2[1]],c=(1.0,1.0,0.8,0.5),lw=1.0)
 			plt.plot([dots2[0],dots1[0]],[dots2[1],dots1[1]],c=(1.0,1.0,0.8,0.75),lw=1.5)
 			plt.plot([dots1[0],dots[0]],[dots1[1],dots[1]],c=(1.0,1.0,0.8,1.0),lw=2.0)
-			plt.plot(dots[0],dots[1],'w.',mec=(1.0,1.0,0.8),mew=1.0,ms=6.0)
+			plt.plot(dots[0],dots[1],'.',c=(1.0,1.0,0.8,0.01),mew=1.0,ms=48.0)
+			plt.plot(dots[0],dots[1],'.',c=(1.0,1.0,0.8,0.05),mew=1.0,ms=24.0)
+			plt.plot(dots[0],dots[1],'.',c=(1.0,1.0,0.8,0.2),mew=1.0,ms=12.0)
+			plt.plot(dots[0],dots[1],'.',c=(1.0,1.0,0.8,0.8),mew=1.0,ms=6.0)
+			plt.plot(dots[0],dots[1],'.',c=(1.0,1.0,0.8),mew=1.0,ms=3.0)
 			plt.savefig('temp.png')
 			plt.close()
 			image = imageio.imread('temp.png')
@@ -66,8 +70,8 @@ def gravity(dots,k,t,a):
 			for i in range(0,len(dots)):
 				corr = (0.5+dist(dots[0][:],dots[0][i],dots[1][:],dots[1][i]))
 				corr = corr**k1
-				deltax[i] = a*(np.sum(dots[0][:]/corr)/np.sum(1/corr)-dots[0][i])+(1-a)*deltax[i]
-				deltay[i] = a*(np.sum(dots[1][:]/corr)/np.sum(1/corr)-dots[1][i])+(1-a)*deltay[i]
+				deltax[i] = a*(np.sum(dots[0][:]/corr)/np.sum(1/corr)-dots[0][i])+deltax[i]
+				deltay[i] = a*(np.sum(dots[1][:]/corr)/np.sum(1/corr)-dots[1][i])+deltay[i]
 				dots[0][i] = dots[0][i]+deltax[i]
 				dots[1][i] = dots[1][i]+deltay[i]
 			if (max(deltax)<0.005 and max(deltay)<0.005 and min(deltax)>-0.005  and min(deltay)>-0.005):
