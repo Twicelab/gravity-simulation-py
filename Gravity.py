@@ -26,7 +26,7 @@ def endProgress():
 	sys.stdout.flush()
 
 def dist(x1,x2,y1,y2):
-	return (x1-x2)**2+(y1-y2)**2
+	return np.power((x1-x2)**2+(y1-y2)**2,0.5)
 
 def gravity(dots,k,t,a,b):
 	dots1 = dots.copy()
@@ -47,8 +47,8 @@ def gravity(dots,k,t,a,b):
 			plt.xlabel('First Axis')
 			plt.ylabel('Second Axis')
 			plt.axis('off')
-			plt.xlim(0, 1)
-			plt.ylim(0, 1)
+			#plt.xlim(0, 1)
+			#plt.ylim(0, 1)
 			plt.text(0.27, -0.05, 'Timelapse acceleration: 1e+'+str(64.0*k/k1),fontsize=10)
 			plt.plot([dots4[0][dots[2]==1],dots3[0][dots[2]==1]],[dots4[1][dots[2]==1],dots3[1][dots[2]==1]],c=(1.0,0.0,0.0,0.7),lw=0.5)
 			plt.plot([dots3[0][dots[2]==1],dots2[0][dots[2]==1]],[dots3[1][dots[2]==1],dots2[1][dots[2]==1]],c=(1.0,0.0,0.0,0.8),lw=1.0)
@@ -77,10 +77,9 @@ def gravity(dots,k,t,a,b):
 			dots2 = dots1.copy()
 			dots1 = dots.copy()
 			for i in range(0,len(dots)):
-				corr = (0.5+dist(dots[0][:],dots[0][i],dots[1][:],dots[1][i]))
-				corr = corr**k1
-				deltax[i] = a*(np.sum((-1)*dots[2][:]*dots[2][i]*(dots[0][:]-dots[0][i])/corr)/np.sum(1/corr)) + b*deltax[i]
-				deltay[i] = a*(np.sum((-1)*dots[2][:]*dots[2][i]*(dots[1][:]-dots[1][i])/corr)/np.sum(1/corr)) + b*deltay[i]
+				corr = (0.5+dist(dots[0][:],dots[0][i],dots[1][:],dots[1][i]))				
+				deltax[i] = a*(np.sum((-1)*dots[2][:]*dots[2][i]*(dots[0][:]-dots[0][i])/corr/corr/corr)) + deltax[i]
+				deltay[i] = a*(np.sum((-1)*dots[2][:]*dots[2][i]*(dots[1][:]-dots[1][i])/corr/corr/corr)) + deltay[i]
 				dots[0][i] = dots[0][i]+deltax[i]
 				dots[1][i] = dots[1][i]+deltay[i]
 			if np.sum(np.asarray(deltax)*np.asarray(deltax)+np.asarray(deltay)*np.asarray(deltay))<1:
@@ -95,6 +94,6 @@ def GO():
 		dots.append([random.random(),random.random(),2*(i%2)-1])
 	dots=pd.DataFrame(dots)
 	print("=== Simulating gravitational force ===")
-	a=gravity(dots,2,100,0.1,0.4)
+	a=gravity(dots,2,100,0.001,0.4)
 
 GO()
