@@ -49,7 +49,7 @@ def gravity(dots,k,t,a,b):
 			plt.axis('off')
 			#plt.xlim(0, 1)
 			#plt.ylim(0, 1)
-			plt.text(0.27, -0.05, 'Timelapse acceleration: 1e+'+str(64.0*k/k1),fontsize=10)
+			#plt.text(0.27, -0.05, 'Timelapse acceleration: 1e+'+str(64.0*k/k1),fontsize=10)
 			plt.plot([dots4[0][dots[2]==1],dots3[0][dots[2]==1]],[dots4[1][dots[2]==1],dots3[1][dots[2]==1]],c=(1.0,0.0,0.0,0.7),lw=0.5)
 			plt.plot([dots3[0][dots[2]==1],dots2[0][dots[2]==1]],[dots3[1][dots[2]==1],dots2[1][dots[2]==1]],c=(1.0,0.0,0.0,0.8),lw=1.0)
 			plt.plot([dots2[0][dots[2]==1],dots1[0][dots[2]==1]],[dots2[1][dots[2]==1],dots1[1][dots[2]==1]],c=(1.0,0.0,0.0,0.9),lw=1.5)
