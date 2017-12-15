@@ -74,7 +74,10 @@ def gravity(dots,k,t,a,b):
 				deltay[i] = a*(np.sum((dots[1][:]-dots[1][i])/corr)/np.sum(1/corr)) + b*deltay[i]
 				dots[0][i] = dots[0][i]+deltax[i]
 				dots[1][i] = dots[1][i]+deltay[i]
-			k1=k1*0.99
+			if (k1>2):
+				k1=k1*0.99
+			else:
+				k1=k1-0.01
 	endProgress()
 
 def GO():
@@ -83,6 +86,6 @@ def GO():
 		dots.append([random.random(),random.random()])
 	dots=pd.DataFrame(dots)
 	print("=== Simulating gravitational force ===")
-	a=gravity(dots,128,100,0.01,0.9)
+	a=gravity(dots,128,100,0.01,0.98)
 
 GO()
